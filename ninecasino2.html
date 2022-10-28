@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+        * {
+            -webkit-box-sizing: border-box;
+                    box-sizing: border-box;
+        }
+
+        body {
+            background: #060E2A;
+            margin: 0;
+            padding: 0;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        .Card {
+            max-width: 512px;
+            min-width: 288px;
+            width: 100%;
+            margin: 28px auto;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            gap: 8px;
+            font-family: "Montserrat", sans-serif;
+            position: relative;
+        }
+
+        @media (max-width: 649px) {
+            .Card {
+                margin: 16px auto;
+                padding: 0 16px;
+            }
+        }
+
+        .Card-Header h2{
+            font-weight: 600;
+            font-size: 24px;
+            line-height: 29px;
+            color: #FFFFFF; 
+        }
+
+        .Card-Header p {
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 160%;
+            color: #828695;
+        }
+
+        .Card-Header p span{
+            color: #FFFFFF;
+        }
+
+        .Card-Content {
+            background: #161D37;
+            border-radius: 12px;
+        }
+
+        .QR {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        text-align: center;
+        padding: 24px 16px;
+        border-bottom: 1px solid #353B52;
+        }
+
+        .QR img {
+            width: 160px;
+            height: 160px;
+            border-radius: 12px;
+        }
+
+        .QR p {
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 140%;
+            color: #FFFFFF;
+            margin: 20px 0px 4px;
+        }
+
+        .QR span {
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 160%;
+            color: #D0D2D7;
+        }
+
+        .Input {
+            padding: 0 24px;
+            position: relative;
+        }
+
+        .Deposit {
+            margin: 24px 0 8px;
+        }
+
+        .Memo {
+            margin: 16px 0 24px;
+        }
+
+        .Input {
+            position: relative;
+        }
+
+        .Input-Copy input{
+            background: #060E2A;
+            border-radius: 8px;
+            padding-left: 16px;
+            padding-top: 20px;
+            font-weight: 500;
+            height: 48px;
+            width: 100%;
+            overflow: auto; 
+            font-size: 14px;
+            color: #EFF0F2;
+            border: none;
+        }
+
+        .Input-Copy::after {
+            content: '';
+            width: 72px;
+            height: 48px;
+            position: absolute;
+            border-radius: 0 8px 8px 0;
+            top: 0x;
+            right: 25px;
+            background: -webkit-gradient(linear, right top, left top, color-stop(70%, #060E2A), to(rgba(6, 14, 42, 0)));
+            background: -o-linear-gradient(right, #060E2A 70%, rgba(6, 14, 42, 0) 100%);
+            background: linear-gradient(270deg, #060E2A 70%, rgba(6, 14, 42, 0) 100%);
+        }
+
+        .Input span{
+            font-size: 10px;
+            color: #A2A5AF;
+            position: absolute;
+            top: 7px;
+            left: 40px;
+        }
+
+        .Input-Img {
+            position: absolute;
+            right: 38px;
+            top: 8px;
+            background: #353B52;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px; 
+            display: -webkit-box; 
+            display: -ms-flexbox; 
+            display: flex; 
+            -webkit-box-pack: center; 
+                -ms-flex-pack: center; 
+                    justify-content: center;
+            -webkit-box-align: center;
+                -ms-flex-align: center;
+                    align-items: center;
+            cursor: pointer;
+        }
+
+        .Input-Img:hover::after {
+            content: 'Click to copy';
+            width: 103px;
+            background: #444A5F;
+            border-radius: 8px;
+            position: absolute;
+            padding: 8px 16px;
+            text-align: center;
+            font-size: 14px;
+            color: #FFFFFF;
+            top: -47px;
+            -webkit-box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.32), 0px 8px 16px rgba(0, 0, 0, 0.24);
+                    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.32), 0px 8px 16px rgba(0, 0, 0, 0.24);
+        }
+
+        .Input-Img:hover::before {
+            content: '';
+            position: absolute;
+            border: 20px solid transparent; 
+            border-top: 20px solid #444A5F;
+            border-radius: 5px;
+            top: -25px;
+            z-index: 10;
+        } 
+
+        .Input-Img svg {
+            pointer-events: none;
+        }
+
+        .Input-Img svg path {
+            pointer-events: none;
+        }
+
+        .MinDeposit {
+            background: #252C45;
+            border-radius: 8px; 
+            margin: 8px 24px;
+            padding: 8px 13px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+                -ms-flex-direction: row;
+                    flex-direction: row;
+            -webkit-box-align: center;
+                -ms-flex-align: center;
+                    align-items: center;
+        }
+
+        .MinDeposit svg {
+            margin-right: 8px;
+        }
+
+        .MinDeposit p {
+            font-weight: 500;
+            font-size: 12px;
+            color: #FFFFFF; 
+        }
+
+        .MinDeposit span {
+            color: #F6DA24;
+        }
+
+        .DepositDesc {
+            font-size: 10px;
+            line-height: 160%;
+            color: #737787;
+            margin: 0 24px 24px;
+        }
+
+        .Card-Footer {
+            background: #161D37;
+            border-radius: 12px;
+            padding: 16px 24px;
+        }
+
+        .Card-Footer div {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+                -ms-flex-direction: row;
+                    flex-direction: row;
+            -webkit-box-align: center;
+                -ms-flex-align: center;
+                    align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .Card-Footer svg {
+            margin-right: 8px;
+        }
+
+        .Card-Footer div p {
+            font-weight: 500;
+            font-size: 14px;
+            color: #FF4444;
+            margin-bottom: 0;
+        }
+
+        .Card-Footer p {
+            font-weight: 400;
+            font-size: 10px;
+            color: #FFA2A2;
+            margin-bottom: 7px;
+        }
+
+        .Notification {
+            position: absolute;
+            width: 208px;
+            height: 46px;
+            right: 24px;
+            top: 24px;
+            background: #252C45;
+            -webkit-box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.32), 0px 8px 16px rgba(0, 0, 0, 0.24);
+                    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.32), 0px 8px 16px rgba(0, 0, 0, 0.24);
+            border-radius: 12px;
+            color: #FFFFFF;
+            font-family: 'Montserrat';
+            font-weight: 500;
+            font-size: 12px;
+            display: none;
+        }
+
+        @media (max-width: 649px) {
+            .Notification {
+                width: auto;
+                right: 16px;
+                left: 16px;
+            }
+        }
+
+        .Notification.visible {
+            display: block;
+        }
+
+        .Notification span {
+            position: absolute;
+            left: 16px; 
+            top: 16px;
+        }
+
+        .Notification-CloseBtn {
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 8px;
+        }
+
+        .InputMemo.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="Card">
+        <div class="Card-Header">
+            <h2>Deposit in ${exchangeTxRes.currencyFrom}</h2>
+            <p>This is your private depositing address. Any transactions you make to this address will be shown in your balance after: <span> 2 confirmation</span></p>
+        </div>
+        <div class="Card-Content">
+            <div class="QR">
+                <img src="${currencyAddress}" alt="QR">
+                <p>Scan for deposit</p>
+                <span>This is the address of your ${exchangeTxRes.currencyFrom} account. You can<br>scan the QR-code to send quickly</span>
+            </div>
+            <div class="Input">
+                <span>Your ${exchangeTxRes.currencyFrom} deposit address</span>
+                <div class="Input-Copy Deposit">
+                    <input disabled value="36YMRULUid8faJoqAKNfcMf85tb9CyKneX"></input>
+                </div>
+                <div class="Input-Img Deposit-Btn" onclick="copyText(event)" > 
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.3343 0.833374H3.33433C2.41766 0.833374 1.66766 1.58337 1.66766 2.50004V14.1667H3.33433V2.50004H13.3343V0.833374ZM15.8343 4.16671H6.66766C5.751 4.16671 5.001 4.91671 5.001 5.83337V17.5C5.001 18.4167 5.751 19.1667 6.66766 19.1667H15.8343C16.751 19.1667 17.501 18.4167 17.501 17.5V5.83337C17.501 4.91671 16.751 4.16671 15.8343 4.16671ZM15.8343 17.5H6.66766V5.83337H15.8343V17.5Z" fill="#A2A5AF"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="MinDeposit">
+                <svg fill="none" height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m10 18.3333c-4.60249 0-8.33333-3.7317-8.33333-8.33334 0-4.60167 3.73084-8.33333 8.33333-8.33333 4.6025 0 8.3333 3.73166 8.3333 8.33333 0 4.60164-3.7308 8.33334-8.3333 8.33334zm-.00149-10.83642c.45959 0 .83229-.37259.83229-.83225 0-.45959-.3727-.83217-.83229-.83217s-.83225.37258-.83225.83217c0 .45966.37266.83225.83225.83225zm.00179 6.66972c.4274-.0001.7795-.322.8275-.7364l.0055-.0972-.0015-4.16737-.0056-.09725c-.0483-.41442-.4006-.736-.82803-.73584-.42733.00017-.77941.322-.82741.7365l-.00559.09717.0015 4.16739.00567.0972c.04825.4144.40058.736.82796.7358z" fill="#f6da24"/></svg>
+                <p>The minimum deposit amount <span>0${exchangeTxRes.minAmountDeposit}</span> ${exchangeTxRes.currencyFrom}</p>
+            </div>
+            <p class="DepositDesc">Deposits below this limit cannot be processed by our payment processor and will not reach your account and not can it be returned back to you.</p>
+            <div class="Input InputMemo">
+                <span>Memo</span>
+                <div class="Input-Copy Memo">
+                    <input disabled value="${tag}"></input>
+                </div>
+                <div class="Input-Img Memo-Btn" onclick="copyText(event)"> 
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.3343 0.833374H3.33433C2.41766 0.833374 1.66766 1.58337 1.66766 2.50004V14.1667H3.33433V2.50004H13.3343V0.833374ZM15.8343 4.16671H6.66766C5.751 4.16671 5.001 4.91671 5.001 5.83337V17.5C5.001 18.4167 5.751 19.1667 6.66766 19.1667H15.8343C16.751 19.1667 17.501 18.4167 17.501 17.5V5.83337C17.501 4.91671 16.751 4.16671 15.8343 4.16671ZM15.8343 17.5H6.66766V5.83337H15.8343V17.5Z" fill="#A2A5AF"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="Card-Footer">
+            <div>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M2.73066 14.6135C2.05084 15.863 2.95526 17.3847 4.37765 17.3847H15.5879C17.0102 17.3847 17.9147 15.863 17.2349 14.6135L11.6297 4.31218C10.9196 3.0071 9.04592 3.0071 8.33583 4.31219L2.73066 14.6135ZM10.8311 13.8599C10.8311 13.4003 10.4585 13.0276 9.99892 13.0276C9.53925 13.0276 9.16667 13.4003 9.16667 13.8599C9.16667 14.3195 9.53925 14.6921 9.99892 14.6921C10.4585 14.6921 10.8311 14.3195 10.8311 13.8599ZM10.6151 7.31546C10.5735 7.01042 10.3118 6.77551 9.99542 6.77576C9.65017 6.77603 9.37058 7.05608 9.37092 7.40126L9.37392 11.1526L9.37967 11.2374C9.42125 11.5424 9.683 11.7774 9.99942 11.7771C10.3446 11.7769 10.6242 11.4968 10.6239 11.1516L10.6209 7.40026L10.6151 7.31546Z" fill="#FF4444"/>
+                </svg>
+                <p>Be careful!</p>
+            </div>
+            <p>Please be careful to send only ${exchangeTxRes.currencyFrom} to this address. Also, take into consideration that it's a one-time crypto address for one deposit. Repeated transfers to the same address will be lost without compensation.</p>
+            <p>Sending any other currency or sending funds to a wrong address may result in funds being lost.</p>
+        </div>
+    </div>
+    <div class="Notification">
+        <span>Copied to clipboard</span>
+        <svg class="Notification-CloseBtn" onclick="closeNotification()"  width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="32" height="32" rx="16" fill="#353B52"/>
+            <path d="M9.50825 9.65596L9.57757 9.57745C9.87798 9.27705 10.3507 9.25394 10.6776 9.50812L10.7561 9.57745L16.0002 14.8209L21.2442 9.57745C21.5697 9.25202 22.0973 9.25202 22.4227 9.57745C22.7482 9.90289 22.7482 10.4305 22.4227 10.756L17.1793 16L22.4227 21.2441C22.7232 21.5445 22.7462 22.0172 22.4921 22.3441L22.4227 22.4226C22.1223 22.723 21.6497 22.7461 21.3227 22.492L21.2442 22.4226L16.0002 17.1792L10.7561 22.4226C10.4306 22.748 9.90301 22.748 9.57757 22.4226C9.25214 22.0972 9.25214 21.5695 9.57757 21.2441L14.821 16L9.57757 10.756C9.27717 10.4556 9.25406 9.98287 9.50825 9.65596L9.57757 9.57745L9.50825 9.65596Z" fill="#A2A5AF"/>
+        </svg>
+    </div>
+</body>
+<script>
+    const inputsText = document.querySelectorAll("input");
+    const notification = document.querySelector(".Notification");
+    const memo = document.querySelector('.InputMemo');
+
+    const copyText = (event) => {
+      function copy(i) {
+        inputsText[i].select();
+        inputsText[i].setSelectionRange(0, 99999);
+
+        navigator.clipboard.writeText(inputsText[i].value);
+
+        notification.classList.add("visible");
+        setTimeout(() => {
+          notification.classList.remove("visible");
+        }, 5000);
+      }
+
+      event.target.className === "Input-Img Deposit-Btn"
+        ? copy(0)
+        : copy(1);
+    };
+
+    const closeNotification = () => {
+        notification.classList.remove("visible");
+    };
+
+    if(!${tag}){
+        memo.classList.add('hidden');
+    };
+  </script>
+</html>
